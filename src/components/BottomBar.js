@@ -16,7 +16,7 @@ export const BottomBar = props => {
         
 
             <button 
-                style={{visibility: props.canNext ? "visible" : "hidden"}}
+                style={{visibility: props.canNext && props.ready ? "visible" : "hidden"}}
                 className="nextButton" 
                 onClick={() => props.next()}>
                     <img src={next} alt="Next" />
