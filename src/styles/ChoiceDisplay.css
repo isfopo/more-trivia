@@ -3,6 +3,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     height: 30vh;
+    width: 100%;
   }
   
   .btn {

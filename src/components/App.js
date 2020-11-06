@@ -10,8 +10,8 @@ import { QuestionDisplay } from "./QuestionDisplay.js";
 import { ChoiceDisplay } from "./ChoiceDisplay.js";
 import { BottomBar } from "./BottomBar.js";
 
-
 import '../styles/App.css';
+import '../styles/Options.css';
 
 export const App = () => {
 
@@ -86,7 +86,6 @@ export const App = () => {
     setDifficulty(value)
   }
 
-
   const increaseScore = () => {
     setScore(score + 1);
   }
@@ -139,9 +138,11 @@ export const App = () => {
         <>
           <HomeDisplay />
 
-          <TotalQuestionInput handleSetTotalQuestions={handleSetTotalQuestions} /> 
-          <CategoryDropdown handleSetCategory={handleSetCategory} />
-          <DifficultyDropdown handleSetDifficulty={handleSetDifficulty} />
+          <div className="options">
+            <TotalQuestionInput handleSetTotalQuestions={handleSetTotalQuestions} /> 
+            <CategoryDropdown handleSetCategory={handleSetCategory} />
+            <DifficultyDropdown handleSetDifficulty={handleSetDifficulty} />
+          </div>
         </>
         :
         <>
@@ -171,6 +172,7 @@ export const App = () => {
           }
         </>
       }
+      
       <BottomBar 
         ready={sessionToken != null}
         canRestart={ !showHome }

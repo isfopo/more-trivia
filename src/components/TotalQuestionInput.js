@@ -3,7 +3,7 @@ import React from 'react'
 export const TotalQuestionInput = props => {
 
     return (
-        <div className="totalQuestionInput">
+        <div className="totalQuestionInput input">
             <label htmlFor="Number of Questions">Number of Questions</label>
             <input 
                 onChange={ e => props.handleSetTotalQuestions(parseInt(e.target.value))}

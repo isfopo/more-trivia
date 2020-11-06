@@ -10,10 +10,10 @@ export const ChoiceDisplay = props => {
 
     const orderStyle = [
         {
-            order: `${props.order[0]}`
+            order: `${ props.order[0]}`
         },
         {
-            order: `${props.order[1]}`
+            order: `${ props.order[1]}`
         },
         {
             order: `${props.order[2]}`
@@ -45,10 +45,12 @@ export const ChoiceDisplay = props => {
                 onClick={() => submitAnswer(1)}
                 style={orderStyle[1]} >{decode(props.incorrect[0])}</button>
 
-            <button 
-                className={`btn ${ !props.isAsking && `${ props.selected === 2 ? "incorrect" : "disabled"}`}`}
-                onClick={() => submitAnswer(2)}
-                style={orderStyle[2]} >{decode(props.incorrect[1])}</button>
+            { props.incorrect.length >= 2 &&
+                <button 
+                    className={`btn ${ !props.isAsking && `${ props.selected === 2 ? "incorrect" : "disabled"}`}`}
+                    onClick={() => submitAnswer(2)}
+                    style={orderStyle[2]} >{decode(props.incorrect[1])}</button>
+            }
 
             { props.incorrect.length === 3 &&
                 <button 

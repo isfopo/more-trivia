@@ -19,11 +19,11 @@ export const CategoryDropdown = props => {
     }, [])
 
     return (
-        <div className="categoryMenu">
+        <div className="categoryMenu dropdown">
             <label htmlFor="category">Category</label>
             <select name="Category" id="category" onChange={ e => props.handleSetCategory(e.target.value)}>
             
-                <option value="0">Any</option>
+                <option selected="selected" value="0">Any</option>
                 
                 {categoryOptions.map( category => (
                     <option key={category.id} value={category.id}>{category.name}</option>

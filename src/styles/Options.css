@@ -1,0 +1,96 @@
+.options {
+    position: fixed;
+    min-width: 200px;
+    bottom: 32vh;
+    right: 4vw;
+    display: flex;
+    flex-direction: column;
+}
+  
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    max-width: 16vw;
+    margin: auto;
+    padding: 2vh;
+    width: 16vw;
+    height: 45px;
+}
+
+.dropdown:after {
+    content: "\25BE";
+    position: relative;
+    right: -100px;
+    top: 0px;
+    margin: auto;
+}
+
+.dropdown:hover {
+    background-color: #e7e7e7;
+    transition: width 2s linear 1s;
+}
+
+.dropdown label {
+    font-size: 12px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.dropdown select {
+    width: 100%;
+    font-size: 16px;
+    padding: 20px 10px;
+    font-family: inherit;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-image: none;
+    outline-offset: -2px;
+    border-color: transparent;
+    outline-color: transparent;
+    box-shadow: none;
+    -webkit-appearance: none;
+    position: absolute;
+}
+
+.dropdown select option {
+    font-family: inherit;
+    width: fit-content;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    max-width: 16vw;
+    margin: auto;
+    padding: 2vh;
+    width: 16vw;
+    height: 45px;
+}
+
+.input:hover {
+    background-color: #e7e7e7;
+}
+
+.input label {
+    font-size: 12px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.input input {
+    width: 100%;
+    font-size: 16px;
+    padding: 20px 10px;
+    font-family: inherit;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-image: none;
+    outline-offset: -2px;
+    border-color: transparent;
+    outline-color: transparent;
+    box-shadow: none;
+    -webkit-appearance: none;
+    position: absolute;
+}

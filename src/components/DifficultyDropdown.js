@@ -3,7 +3,7 @@ import React from 'react'
 export const DifficultyDropdown = props => {
     
     return (
-        <div className="difficultyMenu">
+        <div className="difficultyMenu dropdown">
             <label htmlFor="difficulty">Difficulty</label>
             <select name="Difficulty" id="difficulty" onChange={ e => props.handleSetDifficulty(e.target.value)}>
             
