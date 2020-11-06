@@ -10,7 +10,6 @@ import { QuestionDisplay } from "./QuestionDisplay.js";
 import { ChoiceDisplay } from "./ChoiceDisplay.js";
 import { BottomBar } from "./BottomBar.js";
 
-// import trivia from "../Apprentice_TandemFor400_Data.json";
 
 import '../styles/App.css';
 
@@ -22,11 +21,10 @@ export const App = () => {
   const [difficulty, setDifficulty] = useState("")
 
   const [score, setScore] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(-1);
   const [totalQuestions, setTotalQuestions] = useState(10);
   const [selected, setSelected] = useState(-1);
 
-  const [questionsInSession, setQuestionsInSession] = useState([]);
   const [order, setOrder] = useState([0,1,2,3])
 
   const [isAsking, setIsAsking] = useState(false);
@@ -52,7 +50,7 @@ export const App = () => {
       })
       .then(response => {
         if (response.response_code === 0) {
-          setIsRetrieving(true);
+          setIsRetrieving(false);
           setTrivia(response.results);
         }
       })
@@ -76,6 +74,23 @@ export const App = () => {
     setSelected(value);
   }
 
+  const handleSetTotalQuestions = value => {
+    setTotalQuestions(value)
+  }
+
+  const handleSetCategory = value => {
+    setCategory(value)
+  }
+
+  const handleSetDifficulty = value => {
+    setDifficulty(value)
+  }
+
+
+  const increaseScore = () => {
+    setScore(score + 1);
+  }
+
   const shuffleOrder =  () => { // can this go into <QuestionDisplay /> ?
       let array = order;
   
@@ -92,25 +107,17 @@ export const App = () => {
   }
 
   const getQuestion = () => {
-    let nextQuestion = currentQuestion + 1;
-
-    if ( nextQuestion < totalQuestions ) {
-      setQuestionsInSession([...questionsInSession, nextQuestion]);
-      setCurrentQuestion(nextQuestion);
+    if ( currentQuestion < totalQuestions - 1) {
+      setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowFinal(true);
     }
   }
 
-  const increaseScore = () => {
-    setScore(score + 1);
-  }
-
   const restart = () => {
     setScore(0);
-    
-    setCurrentQuestion(0);
-    setQuestionsInSession([]);
+    getTrivia();
+    setCurrentQuestion(-1);
     setIsAsking(false);
     setShowFinal(false);
     setShowHome(true);
@@ -132,9 +139,9 @@ export const App = () => {
         <>
           <HomeDisplay />
 
-          <TotalQuestionInput setTotalQuestions={() => setTotalQuestions()} /> 
-          <CategoryDropdown setCategory={() => setCategory()} />
-          <DifficultyDropdown setDifficulty={() => setDifficulty()} />
+          <TotalQuestionInput handleSetTotalQuestions={handleSetTotalQuestions} /> 
+          <CategoryDropdown handleSetCategory={handleSetCategory} />
+          <DifficultyDropdown handleSetDifficulty={handleSetDifficulty} />
         </>
         :
         <>
@@ -145,7 +152,7 @@ export const App = () => {
                      
           { !showFinal &&
             <>
-              <ProgressBar progress={((questionsInSession.length - 1) / totalQuestions) * 100}/>
+              <ProgressBar progress={( currentQuestion / totalQuestions) * 100}/>
 
               <QuestionDisplay question={trivia[currentQuestion].question} />
 
