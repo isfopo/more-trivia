@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/more-trivia/static/css/main.9b13ebd3.chunk.css",
+    "main.js": "/more-trivia/static/js/main.c7f63f0f.chunk.js",
+    "main.js.map": "/more-trivia/static/js/main.c7f63f0f.chunk.js.map",
+    "runtime-main.js": "/more-trivia/static/js/runtime-main.876a2cd2.js",
+    "runtime-main.js.map": "/more-trivia/static/js/runtime-main.876a2cd2.js.map",
+    "static/js/2.54bdb638.chunk.js": "/more-trivia/static/js/2.54bdb638.chunk.js",
+    "static/js/2.54bdb638.chunk.js.map": "/more-trivia/static/js/2.54bdb638.chunk.js.map",
+    "static/js/3.3be60669.chunk.js": "/more-trivia/static/js/3.3be60669.chunk.js",
+    "static/js/3.3be60669.chunk.js.map": "/more-trivia/static/js/3.3be60669.chunk.js.map",
+    "index.html": "/more-trivia/index.html",
+    "static/css/main.9b13ebd3.chunk.css.map": "/more-trivia/static/css/main.9b13ebd3.chunk.css.map",
+    "static/js/2.54bdb638.chunk.js.LICENSE.txt": "/more-trivia/static/js/2.54bdb638.chunk.js.LICENSE.txt",
+    "static/media/arrow_forward_ios-24px.e2038e8d.svg": "/more-trivia/static/media/arrow_forward_ios-24px.e2038e8d.svg",
+    "static/media/autorenew-24px.1a05fe15.svg": "/more-trivia/static/media/autorenew-24px.1a05fe15.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.876a2cd2.js",
+    "static/js/2.54bdb638.chunk.js",
+    "static/css/main.9b13ebd3.chunk.css",
+    "static/js/main.c7f63f0f.chunk.js"
+  ]
+}
