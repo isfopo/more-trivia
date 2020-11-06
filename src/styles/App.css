@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+  background-color: #fffdfb;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.question {
+  width: 90%;
+  margin: auto;
+  font: normal normal normal 4vh Roboto;
+}

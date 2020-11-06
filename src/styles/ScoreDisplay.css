@@ -1,0 +1,12 @@
+.scoreDisplay {
+    font: normal normal 300 4vh Roboto;
+}
+
+.scoreDisplay h2 {
+    font-size: 6vh;
+}
+
+.finalScoreDisplay h1 {
+    font-size: 36vh;
+    margin: 6vh;
+}

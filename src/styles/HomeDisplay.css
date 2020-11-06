@@ -1,0 +1,16 @@
+.homeDisplay {
+    margin-left: 10vw;
+    color: #000000DE;
+    text-align: left;
+  }
+  
+  .homeDisplay h1 {
+    font: normal normal 300 10vh Roboto;
+    margin: 20vh 0;
+    letter-spacing: -0.5px;
+    opacity: 1;
+  }
+  
+  .homeDisplay h2 {
+    font: normal normal normal 5vh Roboto;
+  }

@@ -1,0 +1,29 @@
+.bottomBar {
+    display: flex;
+    background: #2a081c 0% 0% no-repeat padding-box;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+  }
+  
+  .bottomBar button {
+    background-color: #ffffff00;
+    border-width: 0;
+    margin: auto;
+    padding: 0;
+  }
+  
+  .bottomBar button:active {
+    outline: 0;
+    transform: scale(0.9); 
+  }
+  
+  .bottomBar button img {
+    height: 40px;
+  }
+  
+  .bottomBar nextButton {
+    float: right;
+  }
