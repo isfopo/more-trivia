@@ -28,10 +28,16 @@ export const App = () => {
 
   useEffect(() => {
     getToken();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const getTrivia = () => {
+  useEffect(() => {
+    getTrivia();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionToken])
 
+  const getTrivia = () => {
+    console.log(sessionToken);
     fetch(`https://opentdb.com/api.php?amount=10&token=${sessionToken}`)
       .then(response => {
         return response.json();
@@ -49,7 +55,7 @@ export const App = () => {
         return response.json();
       })
       .then( response => {
-        setSessionToken(response.token);
+        setSessionToken( response.token );
       })
   }
 
@@ -114,11 +120,8 @@ export const App = () => {
   return (
     <div className="App">
       { showHome ?
-      <>
-        <HomeDisplay /> 
-
-        <button onClick={() => getTrivia()}>get</button>
-        <button onClick={() => getToken()}>getToken</button>
+        <>
+          <HomeDisplay /> 
         </>
         :
         <>
@@ -149,6 +152,7 @@ export const App = () => {
         </>
       }
       <BottomBar 
+        ready={sessionToken != null}
         canRestart={ !showHome }
         restart={() => restart()}
         canNext={!isAsking}
