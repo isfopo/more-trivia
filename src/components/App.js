@@ -42,11 +42,11 @@ export const App = () => {
   useEffect(() => {
     getTrivia();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionToken, difficulty, ])
+  }, [sessionToken, totalQuestions, category, difficulty])
 
   const getTrivia = () => {
     setIsRetrieving(true);
-    fetch(`https://opentdb.com/api.php?amount=10&token=${sessionToken}`)
+    fetch(`https://opentdb.com/api.php?amount=${totalQuestions}&token=${sessionToken}&category=${category}&difficulty=${difficulty}`)
       .then(response => {
         return response.json();
       })
