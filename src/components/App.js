@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { HomeDisplay } from "./HomeDisplay.js";
+import { TotalQuestionInput } from "./TotalQuestionInput.js";
+import { CategoryDropdown } from "./CategoryDropdown.js";
+import { DifficultyDropdown } from "./DifficultyDropdown.js";
+
 import { ScoreDisplay } from "./ScoreDisplay.js";
 import { ProgressBar } from "./ProgressBar.js";
 import { QuestionDisplay } from "./QuestionDisplay.js";
@@ -14,17 +18,21 @@ export const App = () => {
 
   const [trivia, setTrivia] = useState({});
   const [sessionToken, setSessionToken] = useState("");
+  const [category, setCategory] = useState("")
+  const [difficulty, setDifficulty] = useState("")
+
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [totalQuestions] = useState(10);
+  const [totalQuestions, setTotalQuestions] = useState(10);
   const [selected, setSelected] = useState(-1);
+
   const [questionsInSession, setQuestionsInSession] = useState([]);
+  const [order, setOrder] = useState([0,1,2,3])
 
   const [isAsking, setIsAsking] = useState(false);
+  const [isRetrieving, setIsRetrieving] = useState(false);
   const [showHome, setShowHome] = useState(true);
   const [showFinal, setShowFinal] = useState(false);
-
-  const [order, setOrder] = useState([0,1,2,3])
 
   useEffect(() => {
     getToken();
@@ -34,16 +42,17 @@ export const App = () => {
   useEffect(() => {
     getTrivia();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionToken])
+  }, [sessionToken, difficulty, ])
 
   const getTrivia = () => {
-    console.log(sessionToken);
+    setIsRetrieving(true);
     fetch(`https://opentdb.com/api.php?amount=10&token=${sessionToken}`)
       .then(response => {
         return response.json();
       })
       .then(response => {
         if (response.response_code === 0) {
+          setIsRetrieving(true);
           setTrivia(response.results);
         }
       })
@@ -67,7 +76,7 @@ export const App = () => {
     setSelected(value);
   }
 
-  const shuffleOrder =  () => {
+  const shuffleOrder =  () => { // can this go into <QuestionDisplay /> ?
       let array = order;
   
       for (let i = array.length - 1; i > 0; i--) {
@@ -121,7 +130,11 @@ export const App = () => {
     <div className="App">
       { showHome ?
         <>
-          <HomeDisplay /> 
+          <HomeDisplay />
+
+          <TotalQuestionInput setTotalQuestions={() => setTotalQuestions()} /> 
+          <CategoryDropdown setCategory={() => setCategory()} />
+          <DifficultyDropdown setDifficulty={() => setDifficulty()} />
         </>
         :
         <>
@@ -141,10 +154,10 @@ export const App = () => {
                 incorrect={trivia[currentQuestion].incorrect_answers} 
                 increaseScore={() => increaseScore()}
                 next={() => next()}
-                isAsking={isAsking}
-                setIsAsking={handleSetIsAsking}
                 order={order}
                 selected={selected}
+                isAsking={isAsking}
+                setIsAsking={handleSetIsAsking}
                 setSelected={handleSetSelected}
               />
             </>
@@ -155,7 +168,7 @@ export const App = () => {
         ready={sessionToken != null}
         canRestart={ !showHome }
         restart={() => restart()}
-        canNext={!isAsking}
+        canNext={!isAsking && !isRetrieving}
         next={() => next()}
       />
     </div>
