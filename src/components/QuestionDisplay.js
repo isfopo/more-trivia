@@ -7,7 +7,6 @@ export const QuestionDisplay = props => {
         return doc.documentElement.textContent;
       }
       
-
     return (
         <div className="question">
             <p>{decode( props.question )}</p>
