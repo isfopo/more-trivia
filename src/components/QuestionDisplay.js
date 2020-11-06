@@ -1,9 +1,16 @@
 import React from 'react'
 
 export const QuestionDisplay = props => {
+
+    function decode(input) {
+        var doc = new DOMParser().parseFromString(input, "text/html");
+        return doc.documentElement.textContent;
+      }
+      
+
     return (
         <div className="question">
-            <p>{props.question}</p>
+            <p>{decode( props.question )}</p>
         </div>
     )
 }
