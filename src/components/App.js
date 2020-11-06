@@ -6,12 +6,14 @@ import { QuestionDisplay } from "./QuestionDisplay.js";
 import { ChoiceDisplay } from "./ChoiceDisplay.js";
 import { BottomBar } from "./BottomBar.js";
 
-import trivia from "../Apprentice_TandemFor400_Data.json";
+// import trivia from "../Apprentice_TandemFor400_Data.json";
 
 import '../styles/App.css';
 
 export const App = () => {
 
+  const [trivia, setTrivia] = useState({});
+  const [sessionToken, setSessionToken] = useState("");
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [totalQuestions] = useState(10);
@@ -23,6 +25,33 @@ export const App = () => {
   const [showFinal, setShowFinal] = useState(false);
 
   const [order, setOrder] = useState([0,1,2,3])
+
+  useEffect(() => {
+    getToken();
+  }, [])
+
+  const getTrivia = () => {
+
+    fetch(`https://opentdb.com/api.php?amount=10&token=${sessionToken}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        if (response.response_code === 0) {
+          setTrivia(response.results);
+        }
+      })
+  }
+
+  const getToken = () => {
+    fetch(`https://opentdb.com/api_token.php?command=request`)
+      .then( response => {
+        return response.json();
+      })
+      .then( response => {
+        setSessionToken(response.token);
+      })
+  }
 
   const handleSetIsAsking = value => {
     setIsAsking(value);
@@ -48,23 +77,13 @@ export const App = () => {
   }
 
   const getQuestion = () => {
-    let nextQuestion = getRandomIndexNoRepeat(trivia.length);
+    let nextQuestion = currentQuestion + 1;
 
-    if ( questionsInSession.length < totalQuestions ) {
+    if ( nextQuestion < totalQuestions ) {
       setQuestionsInSession([...questionsInSession, nextQuestion]);
       setCurrentQuestion(nextQuestion);
     } else {
       setShowFinal(true);
-    }
-  }
-
-  const getRandomIndexNoRepeat = range => {
-    let newQuestion = Math.floor(Math.random() * range)
-
-    if (questionsInSession.includes(newQuestion)) {
-      return getRandomIndexNoRepeat(range);
-    } else {
-      return newQuestion;
     }
   }
 
@@ -74,6 +93,7 @@ export const App = () => {
 
   const restart = () => {
     setScore(0);
+    
     setCurrentQuestion(0);
     setQuestionsInSession([]);
     setIsAsking(false);
@@ -94,7 +114,12 @@ export const App = () => {
   return (
     <div className="App">
       { showHome ?
+      <>
         <HomeDisplay /> 
+
+        <button onClick={() => getTrivia()}>get</button>
+        <button onClick={() => getToken()}>getToken</button>
+        </>
         :
         <>
           <ScoreDisplay 
@@ -109,8 +134,8 @@ export const App = () => {
               <QuestionDisplay question={trivia[currentQuestion].question} />
 
               <ChoiceDisplay 
-                correct={trivia[currentQuestion].correct} 
-                incorrect={trivia[currentQuestion].incorrect} 
+                correct={trivia[currentQuestion].correct_answer} 
+                incorrect={trivia[currentQuestion].incorrect_answers} 
                 increaseScore={() => increaseScore()}
                 next={() => next()}
                 isAsking={isAsking}
