@@ -2,7 +2,7 @@ A simple trivia quiz using the Open Trivia DB API to auto generate a personalize
 
 ## Go to live site
 
-Follow this link to go to live site: [link](isfopo.github.io/more-trivia)
+Follow this [link](https://isfopo.github.io/more-trivia/) to go to live site
 
 ## How to run locally
 
@@ -26,4 +26,4 @@ run project:
 npm start
 ```
 
-project will run on [localhost:3000](localhost:3000)
+project will run on [localhost:3000](https://localhost:3000)
